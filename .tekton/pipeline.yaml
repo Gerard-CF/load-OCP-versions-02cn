@@ -25,6 +25,7 @@ spec:
       default: prod
     - name: imageName
       description: The name of the image with the container registy namespace
+      default: us.icr.io/namespace/image
   workspaces:
   - name: pipeline-pvc
   tasks:
@@ -60,8 +61,6 @@ spec:
           value: $(params.apikey)
         - name: registryRegion
           value: $(params.registryRegion)
-        - name: imageName
-          value: $(params.imageName)
       workspaces:
       - name: task-pvc
         workspace: pipeline-pvc            
@@ -82,8 +81,6 @@ spec:
           value: $(params.clusterRegion)
         - name: clusterNamespace
           value: $(params.clusterNamespace)
-        - name: imageName
-          value: $(params.imageName)
       workspaces:
       - name: task-pvc
         workspace: pipeline-pvc  
