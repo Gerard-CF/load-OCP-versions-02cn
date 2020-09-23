@@ -42,6 +42,8 @@ spec:
           value: $(params.registryNamespace)
         - name: registryRegion
           value: $(params.registryRegion)
+        - name: imageName
+        value: $(params.imageName)
       workspaces:
       - name: task-pvc
         workspace: pipeline-pvc          
@@ -78,6 +80,8 @@ spec:
           value: $(params.clusterRegion)
         - name: clusterNamespace
           value: $(params.clusterNamespace)
+        - name: imageName
+          value: $(params.imageName)
       workspaces:
       - name: task-pvc
         workspace: pipeline-pvc  
