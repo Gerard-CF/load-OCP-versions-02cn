@@ -57,7 +57,7 @@ spec:
         - set -e -o pipefail;
           ibmcloud login -a $API -r $REGION;
           export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
-          cd /workspace && source pre-build-check.sh;
+          cd /workspace && source .tekton/pre-build-check.sh;
     - name: build-docker-image
       image: ibmcom/pipeline-base-image
       env:
@@ -86,7 +86,7 @@ spec:
           export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
           export GIT_COMMIT=$(git rev-parse HEAD);
           export REGISTRY_URL=$(ibmcloud cr info | sed "2q;d" | awk '{for(i=1;i<=NF;i++) if ($i=="Registry") print $(i+1)}');
-          cd /workspace && source build-docker-image.sh;
+          cd /workspace && source .tekton/build-docker-image.sh;
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
@@ -139,7 +139,7 @@ spec:
           ibmcloud login -a $API -r $REGION;
           while read line; do export $line; done < /artifacts/build.properties;
           cp /artifacts/build.properties .;
-          cd /workspace && source check-vulnerabilities.sh || true;
+          cd /workspace && source .tekton/check-vulnerabilities.sh || true;
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
@@ -158,7 +158,7 @@ spec:
       description: the ibmcloud api endpoint
       default: "https://cloud.ibm.com"
     - name: deployment-file
-      default: deployment.yml
+      default: deployments/deployment.yaml
     - name: clusterNamespace
       default: prod
     - name: cluster
@@ -208,7 +208,7 @@ spec:
           if which oc > /dev/null && ibmcloud ks cluster get -c "${PIPELINE_KUBERNETES_CLUSTER_NAME}" --json | jq -e '.type=="openshift"' > /dev/null; then oc login -u apikey -p "${IBMCLOUD_API_KEY}" ; fi;
           while read line; do export $line; done < /artifacts/build.properties;
           cp /artifacts/build.properties .;
-          cd /workspace && source pre-deploy-check.sh;
+          cd /workspace && source .tekton/pre-deploy-check.sh;
     - name: deploy-to-kubernetes
       image: ibmcom/pipeline-base-image
       env:
@@ -235,5 +235,5 @@ spec:
           if which oc > /dev/null && ibmcloud ks cluster get -c "${PIPELINE_KUBERNETES_CLUSTER_NAME}" --json | jq -e '.type=="openshift"' > /dev/null; then oc login -u apikey -p "${IBMCLOUD_API_KEY}" ; fi;
           while read line; do export $line; done < /artifacts/build.properties;
           cp /artifacts/build.properties .;
-          cd /workspace && source deploy-to-kubernetes.sh;
+          cd /workspace && source .tekton/deploy-to-kubernetes.sh;
       
