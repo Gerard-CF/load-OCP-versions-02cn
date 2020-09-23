@@ -157,7 +157,7 @@ spec:
       description: the ibmcloud api endpoint
       default: "https://cloud.ibm.com"
     - name: deploymentFile
-      default: deployment.yaml
+      description: name location of the deployment file
     - name: clusterNamespace
       default: prod
     - name: cluster
