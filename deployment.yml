@@ -1,0 +1,74 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: load-ocp-versions-02cn
+  namespace: zero-to-cloud-native
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          imagePullSecrets:
+          - name: all-icr-io
+          containers:
+          - env:
+            - name: LOGDNA_APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name:  zero-to-cloud-native-secrets
+                  key: LOGDNA_APIKEY
+            - name: LOGDNA_LOGHOST
+              valueFrom:
+                secretKeyRef:
+                  name:  zero-to-cloud-native-secrets
+                  key: LOGDNA_LOGHOST
+            - name: SERVERNAME
+              valueFrom:
+                secretKeyRef:
+                  name:  zero-to-cloud-native-secrets
+                  key: API_SERVERNAME
+            - name: ENVIRONMENT
+              valueFrom:
+                secretKeyRef:
+                  name:  zero-to-cloud-native-secrets
+                  key: ENVIRONMENT
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name:  zero-to-cloud-native-secrets
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name:  zero-to-cloud-native-secrets
+                  key: REDIS_PORT
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name:  zero-to-cloud-native-secrets
+                  key: REDIS_PASSWORD
+            - name: REDIS_CERT_CRN
+              valueFrom:
+                secretKeyRef:
+                  name:  zero-to-cloud-native-secrets
+                  key: REDIS_CERT_CRN
+            - name: CERT_MANAGER_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name:  zero-to-cloud-native-secrets
+                  key: CERT_MANAGER_ENDPOINT
+            - name: IAM_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name:  zero-to-cloud-native-secrets
+                  key: IAM_ENDPOINT
+            - name: IBMCLOUD_APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name:  zero-to-cloud-native-secrets
+                  key: IBMCLOUD_APIKEY
+            name: load-ocp-versions-02cn
+            image: us.icr.io/zero-to-cloud-native/load-ocp-versions-02cn:v15
+            

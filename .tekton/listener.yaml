@@ -70,10 +70,8 @@ metadata:
   name: binding
 spec:
   params:
-    - name: repository
-      value: "https://github.com/kmcolli/web-frontend-02cn"
     - name: revision
-      value: "master"
+      value: $(params.revision)
 ---
 apiVersion: tekton.dev/v1beta1
 kind: EventListener
