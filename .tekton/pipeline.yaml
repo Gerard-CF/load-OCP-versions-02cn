@@ -22,7 +22,6 @@ spec:
       default: us-south
     - name: deploymentFile
       description: location / name of the deployment file
-      default: deployment.yaml
     - name: clusterNamespace
       description: The Kubernetes cluster namespace
       default: prod
