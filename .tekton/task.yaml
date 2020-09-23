@@ -18,7 +18,6 @@ spec:
       description: the ibmcloud registry namespace
     - name: imageName
       description: the base image name
-      default: "load-ocp-versions"
     - name: registryRegion
       description: the ibmcloud registry region
   workspaces:

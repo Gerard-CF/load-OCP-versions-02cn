@@ -23,6 +23,8 @@ spec:
     - name: clusterNamespace
       description: The Kubernetes cluster namespace
       default: prod
+    - name: imageName
+      description: The name of the image with the container registy namespace
   workspaces:
   - name: pipeline-pvc
   tasks:
