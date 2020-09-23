@@ -60,6 +60,8 @@ spec:
           value: $(params.apikey)
         - name: registryRegion
           value: $(params.registryRegion)
+        - name: imageName
+          value: $(params.imageName)
       workspaces:
       - name: task-pvc
         workspace: pipeline-pvc            
