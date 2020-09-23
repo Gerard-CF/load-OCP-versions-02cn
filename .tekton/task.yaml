@@ -156,8 +156,8 @@ spec:
     - name: api
       description: the ibmcloud api endpoint
       default: "https://cloud.ibm.com"
-    - name: deployment-file
-      default: deployments/deployment.yaml
+    - name: deploymentFile
+      default: deployment.yaml
     - name: clusterNamespace
       default: prod
     - name: cluster
@@ -192,7 +192,7 @@ spec:
         - name: HOME
           value: "/root"
         - name: DEPLOYMENT_FILE
-          value: $(params.deployment-file)
+          value: $(params.deploymentFile)
         - name: CLUSTER_NAMESPACE
           value: $(params.clusterNamespace)
         - name: PIPELINE_KUBERNETES_CLUSTER_NAME
@@ -220,7 +220,7 @@ spec:
         - name: HOME
           value: "/root"
         - name: DEPLOYMENT_FILE
-          value: $(params.deployment-file)
+          value: $(params.deploymentFile)
         - name: CLUSTER_NAMESPACE
           value: $(params.clusterNamespace)
         - name: PIPELINE_KUBERNETES_CLUSTER_NAME

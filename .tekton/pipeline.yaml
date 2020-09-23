@@ -20,6 +20,9 @@ spec:
     - name: clusterRegion
       description: The IBM Cloud Kubernetes cluster region
       default: us-south
+    - name: deploymentFile
+      description: location / name of the deployment file
+      default: deployment.yaml
     - name: clusterNamespace
       description: The Kubernetes cluster namespace
       default: prod
@@ -69,6 +72,8 @@ spec:
       taskRef:
         name: deploy-task
       params:
+        - name: deploymentFile
+          value: $(params.deploymentFile)
         - name: repository
           value: $(params.repository)
         - name: revision
