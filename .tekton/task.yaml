@@ -20,6 +20,7 @@ spec:
       description: the base image name
     - name: registryRegion
       description: the ibmcloud registry region
+    - name: deploymentFile
   workspaces:
   - name: task-pvc
     mountPath: /artifacts   
