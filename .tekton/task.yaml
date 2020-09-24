@@ -153,11 +153,11 @@ spec:
       default: master
     - name: apikey
       description: the ibmcloud api key
+    - name: deploymentFile
+      description: name and location of the deployment file
     - name: api
       description: the ibmcloud api endpoint
       default: "https://cloud.ibm.com"
-    - name: deploymentFile
-      description: name and location of the deployment file
     - name: clusterNamespace
       default: prod
     - name: cluster
