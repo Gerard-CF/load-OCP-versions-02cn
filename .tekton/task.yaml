@@ -78,6 +78,8 @@ spec:
           value: "0"
         - name: GIT_BRANCH
           value: $(params.revision)
+        - name: deploymentFile
+          value: $(params.deploymentFile)
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
@@ -95,6 +97,8 @@ spec:
   params:
     - name: repository
       description: the git repo
+    - name: deploymentFile
+      description: name and location of the deployment file
     - name: revision
       description: the revision
       default: master
