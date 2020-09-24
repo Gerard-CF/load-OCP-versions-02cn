@@ -45,6 +45,8 @@ spec:
           value: $(params.registryNamespace)
         - name: registryRegion
           value: $(params.registryRegion)
+        - name: deploymentFile
+          value: $(params.deploymentFile)
         - name: imageName
           value: $(params.imageName)
       workspaces:
@@ -61,6 +63,8 @@ spec:
           value: $(params.revision)
         - name: apikey
           value: $(params.apikey)
+        - name: deploymentFile
+          value: $(params.deploymentFile)
         - name: registryRegion
           value: $(params.registryRegion)
       workspaces:
