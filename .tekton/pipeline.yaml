@@ -21,7 +21,8 @@ spec:
       description: The IBM Cloud Kubernetes cluster region
       default: us-south
     - name: deploymentFile
-      description: location / name of the deployment file
+      description: location and name of the deployment file
+      default: deployment.yaml
     - name: clusterNamespace
       description: The Kubernetes cluster namespace
       default: prod
