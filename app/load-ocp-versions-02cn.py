@@ -64,8 +64,13 @@ def loadOCPCache():
 
         getVersionUrl="https://containers.cloud.ibm.com/global/v2/getVersions"
         headers = { "Content-Type": "application/json" } 
-        resp = requests.get(getVersionUrl, headers=headers)
-        oc_versions = resp.json()["openshift"]
+        # try to call the api twice
+        try:
+            resp = requests.get(getVersionUrl, headers=headers)
+            oc_versions = resp.json()["openshift"]
+        except:
+            resp = requests.get(getVersionUrl, headers=headers)
+            oc_versions = resp.json()["openshift"]
         returned_versions = []
         for version in oc_versions:
             major = version["major"]
